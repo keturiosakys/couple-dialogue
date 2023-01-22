@@ -1,0 +1,13 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import MainTalk from "@sections/MainTalk.astro";
+import MainContact from "@sections/MainContact.astro";
+
+const { lang, title, description, permalink } = Astro.props;
+---
+
+<BaseLayout {lang} {title} {description} {permalink}>
+	<slot />
+	<MainTalk />
+	<MainContact />
+</BaseLayout>

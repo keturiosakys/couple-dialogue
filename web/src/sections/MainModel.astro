@@ -1,0 +1,43 @@
+---
+import { allModel } from "@lib/api";
+import ServiceLanding from "@components/ServiceLanding.astro";
+
+const url = new URL(Astro.request.url);
+const lang = url.pathname.split("/")[1] === "en" ? "en" : "lt";
+
+const cta = {
+	slug: lang === "en" ? "model" : "samprata",
+	copy: lang === "en" ? "Read more" : "Daugiau",
+};
+---
+
+<section id={cta.slug}>
+	<div class="model">
+		<ServiceLanding
+			title={allModel.title[lang]}
+			truncatedBlurb={allModel.description[lang]}
+			copy={cta.copy}
+			slug={cta.slug}
+		/>
+	</div>
+</section>
+
+<style>
+	section {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 4em 0;
+	}
+
+	.model {
+		max-width: 85%;
+		margin: auto;
+	}
+
+	@media (min-width: 768px) {
+		.paslaugos {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+</style>

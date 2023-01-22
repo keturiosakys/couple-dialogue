@@ -1,0 +1,12 @@
+.DS_Store
+.vscode
+node_modules
+
+studio/prod-export-2022-03-12t18-39-39-480z
+studio/prod-export-2022-03-12t18-39-39-480z
+studio/prod-export-2022-03-12t18-39-39-480z
+studio/prod-export-2022-03-12t18-39-39-480z
+# Local Netlify folder
+.netlify
+
+studio/public

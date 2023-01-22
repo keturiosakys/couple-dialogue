@@ -1,0 +1,31 @@
+---
+const heroCTA = Astro.props.heroCTA;
+---
+
+<button>
+	<a class="cta" href={"#" + heroCTA.slug}>
+		{heroCTA.copy}
+		<img src="/emphasis.svg" width="auto" alt="" />
+	</a>
+</button>
+
+<style>
+	a {
+		display: inline-block;
+		position: relative;
+		padding: 0 1em;
+		z-index: 1;
+	}
+
+	a:hover > img {
+		opacity: 0.7;
+	}
+
+	img {
+		position: absolute;
+		top: -15%;
+		left: 0%;
+		width: calc(100% + 60px);
+		z-index: -1;
+	}
+</style>

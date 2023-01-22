@@ -1,0 +1,26 @@
+---
+import CTA from "./CTA/CTA.astro";
+
+const { title, truncatedBlurb, slug, copy } = Astro.props;
+---
+
+<article>
+	<h3>{title}</h3>
+	<p>{truncatedBlurb}</p>
+	<CTA ctaUrl={slug} ctaCopy={copy} />
+</article>
+
+<style>
+	article {
+		display: flex;
+		flex-direction: column;
+	}
+
+	article > * {
+		margin: 0.6em 0;
+	}
+
+	p {
+		flex-grow: 1;
+	}
+</style>

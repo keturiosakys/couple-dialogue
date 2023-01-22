@@ -1,0 +1,48 @@
+---
+import ConsultantLayout from "@layouts/ConsultantLayout.astro";
+import { allConsultants } from "@lib/api";
+
+const url = new URL(Astro.request.url);
+const permalink = url.href;
+
+export async function getConsultants() {
+	const lang = "en";
+
+	const consultants = allConsultants.map((consultant) => {
+		return {
+			name: consultant.name[lang],
+			slug: consultant.slug,
+			imageAltText: consultant.imageAltText,
+			imageUrl: consultant.imageUrl,
+			headline: consultant.headline[lang],
+			bio: consultant.bio_new[lang],
+		};
+	});
+	return consultants;
+}
+
+export async function getStaticPaths() {
+	const consultants = await getConsultants();
+
+	return consultants.map((consultant) => {
+		return [
+			{
+				params: {
+					consultant: consultant.slug,
+				},
+				props: {
+					name: consultant.name,
+					imageAltText: consultant.imageAltText,
+					imageUrl: consultant.imageUrl,
+					headline: consultant.headline,
+					bio: consultant.bio,
+				},
+			},
+		];
+	});
+}
+
+const { lang, name, imageAltText, imageUrl, headline, bio } = Astro.props;
+---
+
+<ConsultantLayout {permalink} {lang} {name} {imageAltText} {imageUrl} {headline} {bio} />
