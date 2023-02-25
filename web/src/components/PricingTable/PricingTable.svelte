@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let lang: string;
+	export let lang: "en" | "lt";
 	export let prices: PricingTable;
 
 	type PricingTable = Array<PricingBracket>;
@@ -44,7 +44,7 @@
 					<tr>
 						<td>
 							<div class="annotation">
-								{price.label[lang]}
+							{price.label[lang]}
 							</div>
 						</td>
 						<td class="number">
@@ -61,10 +61,6 @@
 </article>
 
 <style>
-	h4 {
-		margin: 1em 0;
-	}
-
 	.table-wrapper {
 		margin: 2em 0;
 	}
