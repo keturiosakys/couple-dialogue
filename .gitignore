@@ -10,3 +10,4 @@ studio/prod-export-2022-03-12t18-39-39-480z
 .netlify
 
 studio/public
+studio/.sanity/runtime
