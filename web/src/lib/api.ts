@@ -40,10 +40,9 @@ export const bookQuery = groq`*[_type == "book"] {
             },
   description,
   cta
-    }[0]`
+    }[0]`;
 
-export const allConsultantsQuery =
-	groq`*[_type == "consultant"] | order(order asc) { 
+export const allConsultantsQuery = groq`*[_type == "consultant"] | order(order asc) { 
       name,
       "slug": slug.current,
       "imageAltText": profile.altText,
@@ -53,8 +52,7 @@ export const allConsultantsQuery =
       bio_new
     }`; //TODO: maybe migrate bio_new to bio
 
-export const allServicesQuery =
-	groq`*[_type == "paslaugos"] | order(order asc) {
+export const allServicesQuery = groq`*[_type == "paslaugos"] | order(order asc) {
             title,
             blurb,
             truncatedBlurb,
