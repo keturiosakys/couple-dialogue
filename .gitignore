@@ -11,3 +11,4 @@ studio/prod-export-2022-03-12t18-39-39-480z
 
 studio/public
 studio/.sanity/runtime
+studio/.env.local
