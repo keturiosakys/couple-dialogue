@@ -1,6 +1,7 @@
+import { defineType } from "sanity";
 import { languages } from "../languages";
 
-export default {
+export default defineType({
 	title: "Localized Bio Section for Consultants",
 	name: "localizedConsultantBioSections",
 	type: "object",
@@ -10,4 +11,4 @@ export default {
 		type: "array",
 		of: [{ type: "consultantBioSection" }],
 	})),
-};
+});

@@ -1,6 +1,6 @@
-import S from "@sanity/desk-tool/structure-builder";
+import { StructureBuilder } from "sanity/desk";
 
-export default () =>
+export default (S: StructureBuilder) =>
 	S.list()
 		.title("coupledialogue.com")
 		.items([
