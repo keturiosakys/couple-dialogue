@@ -1,5 +1,4 @@
 ---
-import Map from "@components/Map.astro";
 import Details from "@components/Details.astro";
 const url = new URL(Astro.request.url);
 const lang = url.pathname.split("/")[1] === "en" ? "en" : "lt";
@@ -9,7 +8,6 @@ const lang = url.pathname.split("/")[1] === "en" ? "en" : "lt";
 	<div class="contact-wrapper">
 		<div class="contact">
 			<Details {lang} />
-			<Map />
 		</div>
 	</div>
 	<hr />
