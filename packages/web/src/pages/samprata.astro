@@ -1,0 +1,12 @@
+---
+import ServiceLayout from "@layouts/ServiceLayout.astro";
+import { allModel } from "@lib/api";
+
+const url = new URL(Astro.request.url);
+const lang = url.pathname.split("/")[1] === "en" ? "en" : "lt";
+const title = allModel.title[lang];
+const description = allModel.description[lang];
+const content = allModel.model[lang].content;
+---
+
+<ServiceLayout {lang} {title} {description} {content} />

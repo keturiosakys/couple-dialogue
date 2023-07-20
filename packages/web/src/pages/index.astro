@@ -1,0 +1,35 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+// Component Imports
+import MainHeader from "@components/Header/MainHeader.astro";
+// Section imports
+import MainHero from "@sections/MainHero.astro";
+import MainModel from "@sections/MainModel.astro";
+import MainServices from "@sections/MainServices.astro";
+import MainConsultants from "@sections/MainConsultants.astro";
+import MainBook from "@sections/MainBook.astro";
+
+// Api and configs
+import { allConfig } from "@lib/api.js";
+
+const url = new URL(Astro.request.url);
+const lang = url.pathname.split("/")[1] === "en" ? "en" : "lt";
+
+let title = allConfig.seo.title;
+let description = allConfig.seo.description;
+let permalink = "https://coupledialogue.com/";
+---
+
+<MainLayout
+	lang={lang}
+	title={title}
+	description={description}
+	permalink={permalink}
+>
+	<MainHeader />
+	<MainHero />
+	<MainModel />
+	<MainServices />
+	<MainConsultants />
+	<MainBook />
+</MainLayout>

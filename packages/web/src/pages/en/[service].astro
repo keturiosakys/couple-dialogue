@@ -1,0 +1,57 @@
+---
+import ServiceLayout from "@layouts/ServiceLayout.astro";
+import { allServices } from "@lib/api";
+
+const url = new URL(Astro.request.url);
+const permalink = url.href;
+
+export async function getServices(lang) {
+	const services = allServices.map((service) => {
+		return {
+			blurb: service.blurb[lang].content,
+			priceBlurb: service.priceBlurb[lang].content,
+			title: service.title[lang],
+			truncatedBlurb: service.truncatedBlurb[lang],
+			slug: service.slug[lang].current,
+			kainos: service.kainos,
+		};
+	});
+	return services;
+}
+
+export async function getStaticPaths() {
+	const lang = "en";
+	const services = await getServices(lang);
+
+	return services.map((service) => {
+		return [
+			{
+				params: {
+					service: service.slug,
+				},
+				props: {
+					lang: lang,
+					title: service.title,
+					description: service.truncatedBlurb,
+					content: service.blurb,
+					prices: service.prices,
+					kainos_prierasas: service.priceBlurb,
+					kainos: service.kainos,
+				},
+			},
+		];
+	});
+}
+
+const { lang, title, description, content, kainos_prierasas, kainos } = Astro.props;
+---
+
+<ServiceLayout
+	{lang}
+	{title}
+	{description}
+	{content}
+	{kainos}
+	{kainos_prierasas}
+	{permalink}
+/>

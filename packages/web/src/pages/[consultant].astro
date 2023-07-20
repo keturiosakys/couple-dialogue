@@ -1,0 +1,72 @@
+---
+import ConsultantLayout from "@layouts/ConsultantLayout.astro";
+import { allConsultants } from "@lib/api";
+import { SanityLang } from "@lib/types";
+
+const url = new URL(Astro.request.url);
+const permalink = url.href;
+
+type Consultant = {
+	name: SanityLang<string>;
+	slug: string;
+	imageAltText: string;
+	imageUrl: string;
+	headline: SanityLang<string>;
+	bio: SanityLang<string>;
+	bio_new: SanityLang<string>;
+};
+
+export async function getConsultants() {
+	const lang = "lt";
+
+	const consultants = allConsultants.map((consultant: Consultant) => {
+		return {
+			name: consultant.name[lang],
+			slug: consultant.slug,
+			imageAltText: consultant.imageAltText,
+			imageUrl: consultant.imageUrl,
+			headline: consultant.headline[lang],
+			bio: consultant.bio_new[lang],
+		};
+	});
+
+	return consultants;
+}
+
+export async function getStaticPaths() {
+	const consultants = await getConsultants();
+
+	return consultants.map((consultant: Consultant) => {
+		return [
+			{
+				params: {
+					consultant: consultant.slug,
+				},
+				props: {
+					name: consultant.name,
+					imageAltText: consultant.imageAltText,
+					imageUrl: consultant.imageUrl,
+					headline: consultant.headline,
+					bio: consultant.bio,
+				},
+			},
+		];
+	});
+}
+
+const { lang, name, imageAltText, imageUrl, headline, bio } = Astro.props;
+---
+
+<ConsultantLayout
+	{lang}
+	{name}
+	{imageAltText}
+	{imageUrl}
+	{headline}
+	{bio}
+	{permalink}
+/>
+
+<script>
+	window.scrollTo(0, 0);
+</script>

@@ -1,0 +1,92 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import MainHeader from "@components/Header/MainHeader.astro";
+import MainTalk from "@sections/MainTalk.astro";
+import MainContact from "@sections/MainContact.astro";
+import { Picture } from "@astrojs/image/components";
+import CTA from "@components/CTA/CTA.astro";
+import { PortableText } from "astro-portabletext";
+import { allBook } from "@lib/api";
+
+const url = new URL(Astro.request.url);
+const permalink = url.href;
+const lang = url.pathname.split("/")[1] === "en" ? "en" : "lt";
+const id = lang === "en" ? "book" : "knyga";
+
+const { imageUrl, altText: imageAltText } = allBook.cover;
+const headingText = allBook.title.lt;
+const headingBody = allBook.description.lt.content;
+const ctaText = allBook.cta.lt;
+const ctaUrl = allBook.cta.url;
+---
+
+<BaseLayout {lang} title={headingText} description={headingBody} {permalink}>
+	<MainHeader />
+	<section {id}>
+		<div class="book-wrapper">
+			<article class="grid-wrapper">
+				<div class="image-wrapper">
+					<Picture
+						src={imageUrl}
+						widths={[200, 400]}
+						alt={imageAltText}
+						aspectRatio={822 / 1207}
+					/>
+				</div>
+				<div class="text-wrapper">
+					<h3>{headingText}</h3>
+					<p>
+						<PortableText value={headingBody} />
+					</p>
+					<CTA ctaUrl={ctaUrl} ctaCopy={ctaText} />
+				</div>
+			</article>
+		</div>
+	</section>
+	<MainTalk />
+	<MainContact />
+</BaseLayout>
+
+<style>
+	section {
+		padding: 4em 0;
+		background-color: var(--color-background);
+	}
+
+	.book-wrapper {
+		max-width: 85%;
+		margin: auto;
+	}
+
+	.grid-wrapper {
+		display: grid;
+		gap: 1em;
+		align-items: center;
+	}
+
+	@media (min-width: 768px) {
+		.grid-wrapper {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	.image-wrapper {
+		display: flex;
+		justify-content: center;
+	}
+
+	img {
+		width: 100%;
+		max-width: 400px;
+		display: block;
+		box-shadow: 0px 5px 10px 0px rgba(192, 110, 82, 0.5);
+	}
+
+	.text-wrapper {
+		max-width: 450px;
+	}
+
+	.text-wrapper > * {
+		margin: 1em 0;
+	}
+</style>

@@ -1,0 +1,110 @@
+---
+import { allLandingPage } from "@lib/api.js";
+import HeroCTA from "@components/CTA/HeroCTA.astro";
+
+const heroContent = allLandingPage.content.hero;
+
+const url = new URL(Astro.request.url);
+const lang = url.pathname.split("/")[1] === "en" ? "en" : "lt";
+
+const heroTitle = heroContent.title[lang];
+const heroDescription = heroContent.description[lang];
+
+const allHeroCTA = {
+	en: {
+		copy: "Let's talk",
+		slug: "lets-talk",
+	},
+	lt: {
+		copy: "Pasikalbėkime",
+		slug: "pasikalbėkime",
+	},
+}; //TODO: heroContent.cta[lang];
+
+const heroCTA = allHeroCTA[lang];
+
+const heroimageAlt = allLandingPage.content.jauLaikas.imageAltText;
+---
+
+<section id={lang == "en" ? "therapy" : "terapija"} class="poru-container">
+	<div class="poru-wrapper">
+		<div class="poru">
+			<div class="hero-text">
+				<h1>{heroTitle}</h1>
+				<div class="description">
+					<p class="text-primary">{heroDescription}</p>
+				</div>
+				<HeroCTA {heroCTA} />
+			</div>
+			<div class="hero-image">
+				<img src="/hero.png" alt={heroimageAlt} />
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	section {
+		align-items: center;
+		padding: 2em 0;
+	}
+
+	.poru-wrapper {
+		max-width: 85%;
+		margin: auto;
+	}
+
+	/* TODO: these ^^^ sections are almost always the same - componentize? */
+
+	.poru {
+		display: grid;
+		gap: 4em;
+	}
+
+	.hero-text {
+		max-width: 30em;
+		margin: auto;
+		order: 2;
+		text-align: center;
+	}
+
+	.hero-text > * :not(h1) {
+		margin: 1em 0;
+	}
+
+	@media (min-width: 768px) {
+		.poru-wrapper {
+			justify-content: center;
+		}
+
+		.poru {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.hero-text {
+			order: 1;
+			text-align: left;
+		}
+
+		.hero-image {
+			order: 2;
+		}
+	}
+
+	h1 {
+		line-height: 1.2em;
+	}
+
+	.hero-image {
+		display: flex;
+		justify-content: center;
+		order: 1;
+	}
+
+	img {
+		max-width: 25em;
+		width: 90%;
+		object-fit: cover;
+		border-radius: 2px;
+	}
+</style>
