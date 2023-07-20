@@ -1,5 +1,4 @@
 [build]
-	command = "pnpm run build"
 	base = "packages/studio/"
 	publish = "public"
 
