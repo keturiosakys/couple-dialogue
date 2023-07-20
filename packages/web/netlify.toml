@@ -1,7 +1,7 @@
 [build]
-	base = "packages/web/"
-	publish = "dist/"
-	command = "pnpm build"
+command = "pnpm build"
+base = "packages/web/"
+publish = "dist"
 
 [context.production]
 	environment = { NODE_VERSION = "20" }

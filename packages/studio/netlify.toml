@@ -1,9 +1,10 @@
+[build]
+command = "pnpm run build"
+base = "packages/studio/"
+publish = "public"
+
 [[redirects]]
 	from = "/*"
 	to = "/index.html"
 	status = 200
 
-[build]
-command = "pnpm build"
-base = "packages/studio/"
-publish = "public/"
