@@ -1,10 +1,6 @@
 {
 	"private": true,
 	"name": "cd-monorepo",
-	"workspaces": [
-		"packages/*"
-	],
-	"scripts": {},
 	"volta": {
 		"node": "20.4.0"
 	}
