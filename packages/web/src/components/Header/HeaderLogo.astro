@@ -1,0 +1,80 @@
+---
+const langOptions = Astro.props.languageOptions;
+
+const url = new URL(Astro.request.url);
+const lang = url.pathname.split("/")[1] === "en" ? "en" : "lt";
+
+let logoUrl: string = "/";
+
+if (lang == "en") {
+	logoUrl = "/en/"
+}
+
+---
+
+<div class="logo-wrapper">
+	<div class="logo">
+		<a href={logoUrl}>
+			<img
+				class="image"
+				src="/couple-dialogue-logo.svg"
+				alt="Couple Dialogue"
+			/>
+		</a>
+	</div>
+	<div class="lang-wrapper">
+		<ul class="lang">
+			<li><a href="/">Lietuviškai</a></li>
+			<li><a href="/en">English</a></li>
+		</ul>
+	</div>
+</div>
+
+<style>
+	.logo-wrapper {
+		display: grid;
+		align-items: center;
+		gap: 1.75em;
+	}
+
+	@media (min-width: 768px) {
+		.logo-wrapper {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		ul {
+			font-size: calc(var(--base-font-size) - 20%);
+		}
+	}
+
+	.lang-wrapper {
+		display: grid;
+	}
+
+	ul {
+		padding: 0;
+		display: grid;
+		padding: 0;
+		margin: 0;
+		justify-content: space-between;
+	}
+
+	@media (max-width: 768px) {
+		.lang-wrapper {
+			justify-content: center;
+		}
+
+		ul {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1em;
+		}
+
+		ul > li {
+			text-align: center;
+		}
+	}
+
+	img {
+		max-height: 2em;
+	}
+</style>

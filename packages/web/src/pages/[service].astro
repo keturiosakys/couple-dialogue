@@ -1,0 +1,67 @@
+---
+import ServiceLayout from "@layouts/ServiceLayout.astro";
+import { allServices } from "@lib/api";
+import { Languages, PricingTable, SanityContent, SanityLang, Slug } from "@lib/types";
+
+const url = new URL(Astro.request.url);
+const permalink = url.href;
+
+export type Service = {
+	title: SanityLang<string>;
+	slug: SanityLang<Slug>;
+	priceBlurb: SanityLang<SanityContent>;
+	truncatedBlurb: SanityLang<SanityContent>;
+	blurb: SanityLang<SanityContent>;
+	kainos: PricingTable
+};
+
+export async function getServices(lang: Languages) {
+	const services = allServices.map((service: Service) => {
+		return {
+			blurb: service.blurb[lang].content,
+			priceBlurb: service.priceBlurb[lang].content,
+			title: service.title[lang],
+			truncatedBlurb: service.truncatedBlurb[lang],
+			slug: service.slug[lang].current,
+			kainos: service.kainos,
+		};
+	});
+	return services;
+}
+
+export async function getStaticPaths() {
+	const lang = "lt";
+	const services = await getServices(lang);
+
+	return services.map((service: Service) => {
+		return [
+			{
+				params: {
+					service: service.slug,
+				},
+				props: {
+					lang: lang,
+					title: service.title,
+					description: service.truncatedBlurb,
+					content: service.blurb,
+					kainos_prierasas: service.priceBlurb,
+					kainos: service.kainos,
+				},
+			},
+		];
+	});
+}
+
+const { lang, title, description, content, kainos_prierasas, kainos } =
+	Astro.props;
+---
+
+<ServiceLayout
+	{lang}
+	{title}
+	{description}
+	{content}
+	{kainos}
+	{kainos_prierasas}
+	{permalink}
+/>

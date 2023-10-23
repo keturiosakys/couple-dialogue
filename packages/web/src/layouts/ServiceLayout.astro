@@ -1,0 +1,61 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import MainTalk from "@sections/MainTalk.astro";
+import MainContact from "@sections/MainContact.astro";
+// Components
+import { PortableText } from "astro-portabletext";
+import PricingTable from "@components/PricingTable/PricingTable.svelte";
+import MainHeader from "@components/Header/MainHeader.astro";
+
+const { lang, title, description, permalink, content, kainos_prierasas, kainos } = Astro.props;
+const { service } = Astro.params;
+const display_pricing =
+	service == "poros-psichoterapija" || service == "couple-psychotherapy"
+		? true
+		: false;
+---
+
+<BaseLayout {lang} {title} {description} {permalink}>
+	<MainHeader />
+	<main>
+		<section>
+			<h1>{title}</h1>
+			<PortableText value={content} />
+			<PortableText value={kainos_prierasas}/>
+			{display_pricing ? <PricingTable lang={lang} prices={kainos} /> : ""}
+		</section>
+	</main>
+	<MainTalk />
+	<MainContact />
+</BaseLayout>
+
+<style>
+
+	main {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		padding: 2em 0;
+		max-width: 85%;
+		margin: auto;
+	}
+
+	section {
+		grid-column: span 3;
+		align-items: center;
+	}
+
+	@media (min-width: 768px) {
+		section {
+			grid-column: span 2;
+		}
+	}
+
+	section > * {
+		padding-bottom: 1em;
+	}
+
+	ul li {
+		list-style: disc;
+	}
+
+</style>

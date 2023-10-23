@@ -1,0 +1,37 @@
+---
+export interface Props {
+	ctaCopy: string;
+	ctaUrl: string;
+}
+
+const url = new URL(Astro.request.url);
+const lang = url.pathname.split("/")[1] === "en" ? "en" : "lt";
+
+let { ctaCopy, ctaUrl } = Astro.props;
+
+if (lang == "en") {
+	ctaUrl = "/en/" + ctaUrl;
+}
+---
+
+<button>
+	<a href={ctaUrl}>{ctaCopy}</a>
+</button>
+
+<style>
+	button {
+		text-align: left;
+		z-index: 1;
+	}
+
+	a {
+		padding-bottom: 0.1em;
+		border-bottom: 2px solid;
+		border-color: var(--color-primary);
+	}
+
+	a:hover {
+		color: var(--color-primary);
+		opacity: 0.6;
+	}
+</style>

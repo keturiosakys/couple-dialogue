@@ -1,0 +1,52 @@
+[build]
+	base = "packages/web/"
+	command = "pnpm run build"
+	publish = "dist"
+
+[context.production]
+	environment = { NODE_VERSION = "20" }
+
+[[redirects]]
+	from = "konsultantai/"
+	to = "/#konsultantai"
+	status = 301
+
+[[redirects]]
+	from = "/porai"
+	to = "/poros-psichoterapija"
+	status = 301
+
+[[redirects]]
+	from = "/individualiai"
+	to = "/individuali-psichoterapija"
+	status = 301
+
+[[redirects]]
+	from = "/supervizijos"
+	to = "/supervizijos-psichoterapeutams"
+	status = 301
+
+[[redirects]]
+	from = "/modelis"
+	to = "/samprata"
+	status = 301
+
+[[redirects]]
+	from = "/en/consultants"
+	to = "/en/#consultants"
+	status = 301
+
+[[redirects]]
+	from = "/en/couples"
+	to = "/en/couple-psychotherapy"
+	status = 301
+
+[[redirects]]
+	from = "/en/individual"
+	to = "/en/individual-psychotherapy"
+	status = 301
+
+[[redirects]]
+	from = "/en/supervision"
+	to = "/en/supervision-for-psychotherapists"
+	status = 301

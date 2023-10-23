@@ -1,15 +1,7 @@
 {
 	"private": true,
-	"type": "module",
-	"name": "couple-dialogue-cms-site",
-	"workspaces": [
-		"web",
-		"studio"
-	],
-	"scripts": {
-		"dev": "npm run dev --workspace=web & npm run dev --workspace=studio"
-	},
+	"name": "cd-monorepo",
 	"volta": {
-		"node": "16.19.0"
+		"node": "20.4.0"
 	}
 }
