@@ -28,6 +28,11 @@ const { lang } = Astro.props;
 			</a>
 		</li>
 	</ul>
+	<div>
+		<p>Markučių g. 36-2</p>
+		<p>Vilnius, LT-11347</p>
+		<p>{lang === "en" ? "Lithuania" : "Lietuva"}</p>
+	</div>
 </div>
 
 <style>
@@ -37,20 +42,13 @@ const { lang } = Astro.props;
 
 	@media (min-width: 768px) {
 		.details {
-			/*grid-column: span 1;*/
-			grid-column-start: 2;
+			grid-column: span 1;
 		}
-	}
-
-	p {
-		display: flex;
-		justify-content: center;
 	}
 
 	.social-icons {
 		display: flex;
 		flex-direction: row;
-		justify-content: center;
 	}
 
 	.social-icons > * {
