@@ -3,7 +3,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import MainHeader from "@components/Header/MainHeader.astro";
 import MainTalk from "@sections/MainTalk.astro";
 import MainContact from "@sections/MainContact.astro";
-import { Picture } from "@astrojs/image/components";
+import { Picture } from "astro:assets";
 import CTA from "@components/CTA/CTA.astro";
 import { PortableText } from "astro-portabletext";
 import { allBook } from "@lib/api";
@@ -28,9 +28,12 @@ const ctaUrl = allBook.cta.url;
 				<div class="image-wrapper">
 					<Picture
 						src={imageUrl}
+						width={400}
+						height={600}
 						widths={[200, 400]}
+						sizes={"(max-width: 768px) 200px, 400px"}
 						alt={imageAltText}
-						aspectRatio={822 / 1207}
+						<!--aspectRatio={ 822 / 1207 }-->
 					/>
 				</div>
 				<div class="text-wrapper">
