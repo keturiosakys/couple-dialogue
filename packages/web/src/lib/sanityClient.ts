@@ -1,4 +1,4 @@
-import sanityClient from "@sanity/client";
+import { createClient } from "@sanity/client";
 
 const config = {
 	projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID,
@@ -7,4 +7,4 @@ const config = {
 	useCdn: false,
 };
 
-export const client = sanityClient(config);
+export const client = createClient(config);
