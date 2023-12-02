@@ -25,7 +25,7 @@ export type SanityContent = {
 };
 
 export type SanityLang<T> = {
-	[key in Languages extends string ? string: never]: T;
+	[key in Languages extends string ? string : never]: T;
 };
 
 export type Languages = "en" | "lt";
@@ -41,4 +41,20 @@ export type SiteConfig = {
 			height: string;
 		};
 	};
+};
+
+export type Consultant = {
+	name: SanityLang<string>;
+	slug: string;
+	imageAltText: string;
+	imageUrl: string;
+	imageMetadata: {
+		_type: string;
+		width: number;
+		height: number;
+		aspectRatio: number;
+	};
+	headline: SanityLang<string>;
+	bio: SanityLang<string>;
+	bio_new: SanityLang<string>;
 };

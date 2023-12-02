@@ -23,7 +23,7 @@ export async function getStaticPaths() {
 	const lang = "en";
 	const services = await getServices(lang);
 
-	return services.map((service) => {
+	return services.flatMap((service) => {
 		return [
 			{
 				params: {

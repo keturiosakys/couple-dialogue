@@ -19,10 +19,11 @@ const id = lang === "en" ? "consultants" : "konsultantai";
 		<div class="konsultantai">
 			<div class="grid-wrapper">
 				{
-					allConsultants.map((consultant) => (
+					allConsultants.map((consultant: any) => (
 						<Consultant
 							imageUrl={consultant.imageUrl}
 							imageAltText={consultant.imageAltText}
+							imageMetadata={consultant.imageMetadata}
 							name={consultant.name[lang]}
 							shortBio={consultant.shortBio[lang]}
 							slug={consultant.slug}

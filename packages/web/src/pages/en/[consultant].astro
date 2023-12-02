@@ -1,6 +1,7 @@
 ---
 import ConsultantLayout from "@layouts/ConsultantLayout.astro";
 import { allConsultants } from "@lib/api";
+import { Consultant } from "@lib/types";
 
 const url = new URL(Astro.request.url);
 const permalink = url.href;
@@ -8,12 +9,13 @@ const permalink = url.href;
 export async function getConsultants() {
 	const lang = "en";
 
-	const consultants = allConsultants.map((consultant) => {
+	const consultants = allConsultants.map((consultant: Consultant) => {
 		return {
 			name: consultant.name[lang],
 			slug: consultant.slug,
 			imageAltText: consultant.imageAltText,
 			imageUrl: consultant.imageUrl,
+			imageMetadata: consultant.imageMetadata,
 			headline: consultant.headline[lang],
 			bio: consultant.bio_new[lang],
 		};
@@ -24,7 +26,7 @@ export async function getConsultants() {
 export async function getStaticPaths() {
 	const consultants = await getConsultants();
 
-	return consultants.map((consultant) => {
+	return consultants.flatMap((consultant: Consultant) => {
 		return [
 			{
 				params: {
@@ -34,6 +36,7 @@ export async function getStaticPaths() {
 					name: consultant.name,
 					imageAltText: consultant.imageAltText,
 					imageUrl: consultant.imageUrl,
+					imageMetadata: consultant.imageMetadata,
 					headline: consultant.headline,
 					bio: consultant.bio,
 				},
@@ -42,7 +45,8 @@ export async function getStaticPaths() {
 	});
 }
 
-const { lang, name, imageAltText, imageUrl, headline, bio } = Astro.props;
+const { lang, name, imageAltText, imageUrl, imageMetadata, headline, bio } = Astro.props;
 ---
 
-<ConsultantLayout {permalink} {lang} {name} {imageAltText} {imageUrl} {headline} {bio} />
+<ConsultantLayout {permalink} {lang} {name} {imageAltText} {imageUrl} {imageMetadata} {headline} {bio} />
+

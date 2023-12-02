@@ -33,7 +33,7 @@ export async function getStaticPaths() {
 	const lang = "lt";
 	const services = await getServices(lang);
 
-	return services.map((service: Service) => {
+	return services.flatMap((service: Service) => {
 		return [
 			{
 				params: {

@@ -5,12 +5,13 @@ import MainContact from "@sections/MainContact.astro";
 // Components
 import { PortableText } from "astro-portabletext";
 import MainHeader from "@components/Header/MainHeader.astro";
-import { Image } from "@astrojs/image/components";
+import { Image } from "astro:assets";
 
-const { lang, name, imageAltText, imageUrl, headline, bio, permalink } =
+const { lang, name, imageAltText, imageUrl, imageMetadata, headline, bio, permalink } =
 	Astro.props;
 const title = name;
 const description = headline;
+const { width, height } = imageMetadata;
 ---
 
 <BaseLayout {lang} {title} {description} {permalink}>
@@ -21,8 +22,8 @@ const description = headline;
 				<Image
 					src={imageUrl}
 					alt={imageAltText}
-					width="500"
-					aspectRatio="1"
+					width={width}
+					height={height}
 					format="webp"
 				/>
 				<!-- <img src={imageUrl} alt={imageAltText} /> -->
@@ -34,7 +35,7 @@ const description = headline;
 		</div>
 		<article class="bio">
 			{
-				bio.map((section) => (
+				bio.map((section: any) => (
 					<>
 						<h4>{section.title}</h4>
 						<div>
@@ -48,6 +49,10 @@ const description = headline;
 	<MainTalk />
 	<MainContact />
 </BaseLayout>
+
+<script>
+	window.scrollTo(0, 0);
+</script>
 
 <style>
 	body {

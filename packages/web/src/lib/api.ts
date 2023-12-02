@@ -22,6 +22,7 @@ export const allLandingPageQuery = groq`*[_type == "landingPage"] {
             subtitle,
             "imageAltText": visual.altText,
             "imageUrl": visual.image.asset->url,
+						"imageMetadata": visual.image.asset->metadata.dimensions
           }
         }
     }  [0]`;
@@ -36,7 +37,8 @@ export const bookQuery = groq`*[_type == "book"] {
             title,
             cover {
               altText,
-			  "imageUrl": image.asset->url
+							"imageUrl": image.asset->url,
+							"imageMetadata": image.asset->metadata.dimensions
             },
   description,
   cta
@@ -47,6 +49,7 @@ export const allConsultantsQuery = groq`*[_type == "consultant"] | order(order a
       "slug": slug.current,
       "imageAltText": profile.altText,
       "imageUrl": profile.image.asset->url,
+      "imageMetadata": profile.image.asset->metadata.dimensions,
       headline,
       shortBio,
       bio_new

@@ -1,20 +1,10 @@
 ---
 import ConsultantLayout from "@layouts/ConsultantLayout.astro";
 import { allConsultants } from "@lib/api";
-import { SanityLang } from "@lib/types";
+import { Consultant } from "@lib/types";
 
 const url = new URL(Astro.request.url);
 const permalink = url.href;
-
-type Consultant = {
-	name: SanityLang<string>;
-	slug: string;
-	imageAltText: string;
-	imageUrl: string;
-	headline: SanityLang<string>;
-	bio: SanityLang<string>;
-	bio_new: SanityLang<string>;
-};
 
 export async function getConsultants() {
 	const lang = "lt";
@@ -25,6 +15,7 @@ export async function getConsultants() {
 			slug: consultant.slug,
 			imageAltText: consultant.imageAltText,
 			imageUrl: consultant.imageUrl,
+			imageMetadata: consultant.imageMetadata,
 			headline: consultant.headline[lang],
 			bio: consultant.bio_new[lang],
 		};
@@ -36,7 +27,7 @@ export async function getConsultants() {
 export async function getStaticPaths() {
 	const consultants = await getConsultants();
 
-	return consultants.map((consultant: Consultant) => {
+	return consultants.flatMap((consultant: Consultant) => {
 		return [
 			{
 				params: {
@@ -46,6 +37,7 @@ export async function getStaticPaths() {
 					name: consultant.name,
 					imageAltText: consultant.imageAltText,
 					imageUrl: consultant.imageUrl,
+					imageMetadata: consultant.imageMetadata,
 					headline: consultant.headline,
 					bio: consultant.bio,
 				},
@@ -54,7 +46,7 @@ export async function getStaticPaths() {
 	});
 }
 
-const { lang, name, imageAltText, imageUrl, headline, bio } = Astro.props;
+const { lang, name, imageAltText, imageUrl, imageMetadata, headline, bio } = Astro.props;
 ---
 
 <ConsultantLayout
@@ -62,11 +54,8 @@ const { lang, name, imageAltText, imageUrl, headline, bio } = Astro.props;
 	{name}
 	{imageAltText}
 	{imageUrl}
+	{imageMetadata}
 	{headline}
 	{bio}
 	{permalink}
 />
-
-<script>
-	window.scrollTo(0, 0);
-</script>
