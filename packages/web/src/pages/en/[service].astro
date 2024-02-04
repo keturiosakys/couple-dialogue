@@ -1,49 +1,19 @@
 ---
 import ServiceLayout from "@layouts/ServiceLayout.astro";
 import { allServices } from "@lib/api";
+import { mapServices, getServices } from "@lib/utils";
 
 const url = new URL(Astro.request.url);
 const permalink = url.href;
 
-export async function getServices(lang) {
-	const services = allServices.map((service) => {
-		return {
-			blurb: service.blurb[lang].content,
-			priceBlurb: service.priceBlurb[lang].content,
-			title: service.title[lang],
-			truncatedBlurb: service.truncatedBlurb[lang],
-			slug: service.slug[lang].current,
-			kainos: service.kainos,
-		};
-	});
-	return services;
-}
-
 export async function getStaticPaths() {
 	const lang = "en";
-	const services = await getServices(lang);
+	const services = await getServices(lang, allServices);
 
-	return services.flatMap((service) => {
-		return [
-			{
-				params: {
-					service: service.slug,
-				},
-				props: {
-					lang: lang,
-					title: service.title,
-					description: service.truncatedBlurb,
-					content: service.blurb,
-					prices: service.prices,
-					kainos_prierasas: service.priceBlurb,
-					kainos: service.kainos,
-				},
-			},
-		];
-	});
+	return services.flatMap(mapServices(lang));
 }
 
-const { lang, title, description, content, kainos_prierasas, kainos } = Astro.props;
+const { lang, title, description, content, kainos_prierasas, price } = Astro.props;
 ---
 
 <ServiceLayout
@@ -51,7 +21,7 @@ const { lang, title, description, content, kainos_prierasas, kainos } = Astro.pr
 	{title}
 	{description}
 	{content}
-	{kainos}
+	{price}
 	{kainos_prierasas}
 	{permalink}
 />

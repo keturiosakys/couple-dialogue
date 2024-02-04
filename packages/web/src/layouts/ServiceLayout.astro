@@ -4,15 +4,11 @@ import MainTalk from "@sections/MainTalk.astro";
 import MainContact from "@sections/MainContact.astro";
 // Components
 import { PortableText } from "astro-portabletext";
-import PricingTable from "@components/PricingTable/PricingTable.svelte";
+import PricingTable from "@components/PricingTable.astro";
 import MainHeader from "@components/Header/MainHeader.astro";
 
-const { lang, title, description, permalink, content, kainos_prierasas, kainos } = Astro.props;
+const { lang, title, description, permalink, content, kainos_prierasas, price } = Astro.props;
 const { service } = Astro.params;
-const display_pricing =
-	service == "poros-psichoterapija" || service == "couple-psychotherapy"
-		? true
-		: false;
 ---
 
 <BaseLayout {lang} {title} {description} {permalink}>
@@ -22,7 +18,7 @@ const display_pricing =
 			<h1>{title}</h1>
 			<PortableText value={content} />
 			<PortableText value={kainos_prierasas}/>
-			{display_pricing ? <PricingTable lang={lang} prices={kainos} /> : ""}
+			<PricingTable lang={lang} price={price} />
 		</section>
 	</main>
 	<MainTalk />
@@ -42,6 +38,10 @@ const display_pricing =
 	section {
 		grid-column: span 3;
 		align-items: center;
+	}
+
+	h3 {
+		padding-bottom: 1em;
 	}
 
 	@media (min-width: 768px) {

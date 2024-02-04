@@ -1,0 +1,26 @@
+---
+const { price, lang } = Astro.props;
+
+if (!price) {
+	return undefined // hide the component if there is no price set
+}
+
+function label(num: number) {
+	if (lang === "en") {
+		return `Session with ${num} counsellor${num > 1 ? "s" : ""}`;
+	} else {
+		return `Konsultuoja ${num} psichoterapeut${ num > 1 ? "ai" : "ė / -as" }`;
+	}
+}
+
+function post() {
+	return lang === "en" ? "/ h" : "/ val.";
+}
+
+---
+
+<h4>{label(1)}</h4>
+<p>{price?.price_1} € {post()}</p>
+
+<h4>{label(2)}</h4>
+<p>{price?.price_2} € {post()}</p>
