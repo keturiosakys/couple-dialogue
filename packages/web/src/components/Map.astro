@@ -1,14 +1,16 @@
 ---
+
+const src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2306.9826339346478!2d25.307971777678233!3d54.674733974506445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dd95137da53645%3A0x9e1c5871084ec7c4!2sMarku%C4%8Di%C5%B3%20g.%2036-2%2C%2011347%20Vilnius%2C%20Lithuania!5e0!3m2!1sen!2snl!4v1707062387769!5m2!1sen!2snl"
 ---
 
 <div class="map">
-	<iframe
+	<iframe 
+		src={src}
 		width="100%"
 		height="100%"
-		frameborder="0"
-		title="Felt Map"
-		src="https://felt.com/embed/map/Couple-Dialogue-8SVLzT5SRQi8n9CWn9C9AdPcA?lat=54.67479159837808&lon=25.307927158308374&zoom=15.863"
-	></iframe>
+		style="border:0;" 
+		loading="lazy" 
+		referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
 
 <style>
