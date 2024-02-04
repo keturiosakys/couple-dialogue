@@ -3,17 +3,10 @@ export type AstroURLObject = {
 	pathname: string;
 };
 
-export type PricingTable = Array<PricingBracket>;
-
-export type PricingBracket = {
-	slug: string;
-	label: {
-		en: string;
-		lt: string;
-	};
+export type Prices = {
 	price_1: number;
 	price_2: number;
-};
+}
 
 export type Slug = {
 	current: string;
@@ -58,3 +51,14 @@ export type Consultant = {
 	bio: SanityLang<string>;
 	bio_new: SanityLang<string>;
 };
+
+
+export type Service = {
+	title: SanityLang<string>;
+	slug: SanityLang<Slug>;
+	priceBlurb: SanityLang<SanityContent>;
+	truncatedBlurb: SanityLang<SanityContent>;
+	blurb: SanityLang<SanityContent>;
+	price: Prices
+};
+

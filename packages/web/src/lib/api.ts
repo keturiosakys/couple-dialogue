@@ -61,7 +61,7 @@ export const allServicesQuery = groq`*[_type == "paslaugos"] | order(order asc) 
             truncatedBlurb,
             priceBlurb,
             slug,
-			kainos
+						price
     }`;
 
 export const allConfig: SiteConfig = await client.fetch(allConfigQuery);
