@@ -5,7 +5,6 @@ import book from "./documents/book";
 import landingPage from "./documents/landingPage";
 import model from "./documents/model";
 import paslaugos from "./documents/paslaugos";
-import pricing from "./documents/pricing";
 
 // Objects
 import localizedString from "./objects/localizedString";
@@ -25,7 +24,6 @@ export default [
 	config,
 	model,
 	paslaugos,
-	pricing,
 	landingPage,
 	// Objects
 	a11yImage,
